@@ -302,6 +302,7 @@ namespace cf {
 			return `<cf-chat type='pluto'>
 						<scrollable>
 							<div class="scrollableInner"></div>
+							<div class="fadeout"></div>
 						</scrollable>
 					</cf-chat>`;
 		}
