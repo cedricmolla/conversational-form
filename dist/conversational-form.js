@@ -5092,8 +5092,9 @@ var cf;
         * click handler for el
         */
         ChatResponse.prototype.onClick = function (event) {
-            this.setToThinking();
-            cf.ConversationalForm.illustrateFlow(this, "dispatch", cf.ChatResponseEvents.USER_ANSWER_CLICKED, event);
+            /*this.setToThinking();
+
+            ConversationalForm.illustrateFlow(this, "dispatch", ChatResponseEvents.USER_ANSWER_CLICKED, event);*/
             this.eventTarget.dispatchEvent(new CustomEvent(cf.ChatResponseEvents.USER_ANSWER_CLICKED, {
                 detail: this._tag
             }));
@@ -5403,7 +5404,7 @@ var cf;
             return response;
         };
         ChatList.prototype.getTemplate = function () {
-            return "<cf-chat type='pluto'>\n\t\t\t\t\t\t<scrollable>\n\t\t\t\t\t\t\t<div class=\"scrollableInner\"></div>\n\t\t\t\t\t\t\t<div class=\"fadeout\"></div>\n\t\t\t\t\t\t</scrollable>\n\t\t\t\t\t</cf-chat>";
+            return "<cf-chat type='pluto'>\n\t\t\t\t\t\t<scrollable>\n\t\t\t\t\t\t\t<div class=\"scrollableInner\"></div>\n\t\t\t\t\t\t</scrollable>\n\t\t\t\t\t\t<div class=\"fadeout\"></div>\n\t\t\t\t\t</cf-chat>";
         };
         ChatList.prototype.dealloc = function () {
             this.eventTarget.removeEventListener(cf.FlowEvents.FLOW_UPDATE, this.flowUpdateCallback, false);
