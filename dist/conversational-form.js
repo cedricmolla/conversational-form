@@ -6087,8 +6087,8 @@ var cf;
         * on user ChatReponse clicked
         */
         ConversationalForm.prototype.onUserAnswerClicked = function (event) {
-            var tag = event.detail;
-            this.flowManager.editTag(tag);
+            /*const tag: ITag | ITagGroup = event.detail;
+            this.flowManager.editTag(tag);*/
         };
         ConversationalForm.prototype.addBrowserTypes = function (el) {
             if (navigator.userAgent.indexOf('Firefox') > -1)

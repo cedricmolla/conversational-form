@@ -557,8 +557,8 @@ namespace cf {
 		* on user ChatReponse clicked
 		*/
 		private onUserAnswerClicked(event: CustomEvent): void {
-			const tag: ITag | ITagGroup = event.detail;
-			this.flowManager.editTag(tag);
+			/*const tag: ITag | ITagGroup = event.detail;
+			this.flowManager.editTag(tag);*/
 		}
 
 		private addBrowserTypes(el:Element):void {
