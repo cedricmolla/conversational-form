@@ -3431,7 +3431,9 @@ var cf;
                     }));
                 }, 0);
             };
-            reader.readAsDataURL(this.files[0]);
+            if (this.files[0]) {
+                reader.readAsDataURL(this.files[0]);
+            }
         };
         UploadFileUI.prototype.animateIn = function () {
             if (this.loading)
