@@ -1758,6 +1758,7 @@ var cf;
 /// <reference path="InputTag.ts"/>
 /// <reference path="ButtonTag.ts"/>
 /// <reference path="SelectTag.ts"/>
+/// <reference path="SelectOfferTag.ts"/>
 /// <reference path="OptionTag.ts"/>
 /// <reference path="CfRobotMessageTag.ts"/>
 /// <reference path="../ConversationalForm.ts"/>
@@ -2034,6 +2035,11 @@ var cf;
                 }
                 else if (element.tagName.toLowerCase() == "select") {
                     tag = new cf.SelectTag({
+                        domElement: element
+                    });
+                }
+                else if (element.tagName.toLowerCase() == "show_offers") {
+                    tag = new cf.SelectOfferTag({
                         domElement: element
                     });
                 }

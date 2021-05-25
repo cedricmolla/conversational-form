@@ -2,6 +2,7 @@
 /// <reference path="InputTag.ts"/>
 /// <reference path="ButtonTag.ts"/>
 /// <reference path="SelectTag.ts"/>
+/// <reference path="SelectOfferTag.ts"/>
 /// <reference path="OptionTag.ts"/>
 /// <reference path="CfRobotMessageTag.ts"/>
 /// <reference path="../ConversationalForm.ts"/>
@@ -318,6 +319,10 @@ namespace cf {
 					tag = new SelectTag({
 						domElement: element
 					});
+				}else if(element.tagName.toLowerCase() == "show_offers"){
+					tag = new SelectOfferTag({
+						domElement: element
+					});					
 				}else if(element.tagName.toLowerCase() == "button"){
 					tag = new ButtonTag({
 						domElement: element
