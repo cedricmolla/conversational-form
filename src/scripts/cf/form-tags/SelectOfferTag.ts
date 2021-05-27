@@ -11,7 +11,7 @@ namespace cf {
 		private _values: Array<string>;
 
 		public get type (): string{
-			return "show_offers";
+			return "select";
 		}
 
 		public get name (): string{
@@ -34,7 +34,7 @@ namespace cf {
 			var domOptionTags: NodeListOf<HTMLOptionElement> = this.domElement.getElementsByTagName("option");
 			for (let i = 0; i < domOptionTags.length; i++) {
 				let element: HTMLOptionElement = <HTMLOptionElement>domOptionTags[i];
-				let tag: OptionTag = <OptionTag> cf.Tag.createTag(element);
+				let tag: OfferTag = <OfferTag> cf.Tag.createTag(element);
 
 				if(tag){
 					this.optionTags.push(tag);
@@ -54,10 +54,11 @@ namespace cf {
 			if(dto.controlElements){
 				// TODO: Refactor this so it is less dependant on controlElements
 				for (let i = 0; i < this.optionTags.length; i++) {
-					let tag: OptionTag = <OptionTag>this.optionTags[i];
+					let tag: OfferTag = <OfferTag>this.optionTags[i];
 
 					for (let j = 0; j < dto.controlElements.length; j++) {
 						let controllerElement: OptionButton = <OptionButton>dto.controlElements[j];
+
 						if(controllerElement.referenceTag == tag){
 							// tag match found, so set value
 							tag.selected = controllerElement.selected;
@@ -96,7 +97,7 @@ namespace cf {
 			// special case 1, only one optiontag visible from a filter
 			if(!isValid && numberOptionButtonsVisible.length == 1){
 				let element: OptionButton = numberOptionButtonsVisible[0];
-				let tag: OptionTag = this.optionTags[this.optionTags.indexOf(<OptionTag> element.referenceTag)];
+				let tag: OfferTag = this.optionTags[this.optionTags.indexOf(<OfferTag> element.referenceTag)];
 				element.selected = true;
 				tag.selected = true;
 				isValid = true;

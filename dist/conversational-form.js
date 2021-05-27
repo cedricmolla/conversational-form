@@ -1760,6 +1760,7 @@ var cf;
 /// <reference path="SelectTag.ts"/>
 /// <reference path="SelectOfferTag.ts"/>
 /// <reference path="OptionTag.ts"/>
+/// <reference path="OfferTag.ts"/>
 /// <reference path="CfRobotMessageTag.ts"/>
 /// <reference path="../ConversationalForm.ts"/>
 /// <reference path="../logic/EventDispatcher.ts"/>
@@ -1775,6 +1776,7 @@ var cf;
 // radio
 // select
 // button
+// show_offers
 // namespace
 var cf;
 (function (cf) {
@@ -2010,7 +2012,7 @@ var cf;
             if (element.tagName.toLowerCase() == "option" && (!isTagFormless && innerText == "" || innerText == " ")) {
                 return false;
             }
-            if (element.tagName.toLowerCase() == "select" || element.tagName.toLowerCase() == "option")
+            if (element.tagName.toLowerCase() == "select" || element.tagName.toLowerCase() == "option" || element.tagName.toLowerCase() == "show_offers")
                 return true;
             else if (isTagFormless) {
                 return true;
@@ -2049,9 +2051,16 @@ var cf;
                     });
                 }
                 else if (element.tagName.toLowerCase() == "option") {
-                    tag = new cf.OptionTag({
-                        domElement: element
-                    });
+                    if (element.parentElement.tagName.toLowerCase() == "show_offers") {
+                        tag = new cf.OfferTag({
+                            domElement: element
+                        });
+                    }
+                    else {
+                        tag = new cf.OptionTag({
+                            domElement: element
+                        });
+                    }
                 }
                 else if (element.tagName.toLowerCase() == "cf-robot-message") {
                     tag = new cf.CfRobotMessageTag({
@@ -2297,6 +2306,7 @@ var cf;
 /// <reference path="ButtonTag.ts"/>
 /// <reference path="InputTag.ts"/>
 /// <reference path="SelectTag.ts"/>
+/// <reference path="SelectOfferTag.ts"/>
 /// <reference path="../ui/inputs/UserTextInput.ts"/>
 // group tags together, this is done automatically by looking through InputTags with type radio or checkbox and same name attribute.
 // single choice logic for Radio Button, <input type="radio", where name is the same
@@ -2788,6 +2798,131 @@ var cf;
 (function (cf) {
     // interface
     // class
+    var SelectOfferTag = /** @class */ (function (_super) {
+        __extends(SelectOfferTag, _super);
+        function SelectOfferTag(options) {
+            var _this = _super.call(this, options) || this;
+            // build the option tags
+            _this.optionTags = [];
+            var domOptionTags = _this.domElement.getElementsByTagName("option");
+            for (var i = 0; i < domOptionTags.length; i++) {
+                var element = domOptionTags[i];
+                var tag = cf.Tag.createTag(element);
+                if (tag) {
+                    _this.optionTags.push(tag);
+                }
+                else {
+                    console.warn(_this.constructor.name, 'option tag invalid:', tag);
+                }
+            }
+            return _this;
+        }
+        Object.defineProperty(SelectOfferTag.prototype, "type", {
+            get: function () {
+                return "select";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(SelectOfferTag.prototype, "name", {
+            get: function () {
+                return this.domElement && this.domElement.hasAttribute("name") ? this.domElement.getAttribute("name") : this.optionTags[0].name;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(SelectOfferTag.prototype, "value", {
+            get: function () {
+                return this._values;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(SelectOfferTag.prototype, "multipleChoice", {
+            get: function () {
+                return this.domElement.hasAttribute("multiple");
+            },
+            enumerable: true,
+            configurable: true
+        });
+        SelectOfferTag.prototype.setTagValueAndIsValid = function (dto) {
+            var isValid = false;
+            // select tag values are set via selected attribute on option tag
+            var numberOptionButtonsVisible = [];
+            this._values = [];
+            if (dto.controlElements) {
+                // TODO: Refactor this so it is less dependant on controlElements
+                for (var i = 0; i < this.optionTags.length; i++) {
+                    var tag = this.optionTags[i];
+                    for (var j = 0; j < dto.controlElements.length; j++) {
+                        var controllerElement = dto.controlElements[j];
+                        if (controllerElement.referenceTag == tag) {
+                            // tag match found, so set value
+                            tag.selected = controllerElement.selected;
+                            // check for minimum one selected
+                            if (!isValid && tag.selected)
+                                isValid = true;
+                            if (tag.selected)
+                                this._values.push(tag.value);
+                            if (controllerElement.visible)
+                                numberOptionButtonsVisible.push(controllerElement);
+                        }
+                    }
+                }
+            }
+            else {
+                var wasSelected = false;
+                // for when we don't have any control elements, then we just try and map values
+                for (var i = 0; i < this.optionTags.length; i++) {
+                    var tag = this.optionTags[i];
+                    var v1 = tag.value.toString().toLowerCase();
+                    var v2 = dto.text.toString().toLowerCase();
+                    //brute force checking...
+                    if (v1.indexOf(v2) !== -1 || v2.indexOf(v1) !== -1) {
+                        // check the original tag
+                        this._values.push(tag.value);
+                        tag.domElement.checked = true;
+                        wasSelected = true;
+                    }
+                }
+                isValid = wasSelected;
+            }
+            // special case 1, only one optiontag visible from a filter
+            if (!isValid && numberOptionButtonsVisible.length == 1) {
+                var element = numberOptionButtonsVisible[0];
+                var tag = this.optionTags[this.optionTags.indexOf(element.referenceTag)];
+                element.selected = true;
+                tag.selected = true;
+                isValid = true;
+                if (tag.selected)
+                    this._values.push(tag.value);
+            }
+            return isValid;
+        };
+        return SelectOfferTag;
+    }(cf.Tag));
+    cf.SelectOfferTag = SelectOfferTag;
+})(cf || (cf = {}));
+
+/// <reference path="Tag.ts"/>
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+// namespace
+var cf;
+(function (cf) {
+    // interface
+    // class
     var ButtonTag = /** @class */ (function (_super) {
         __extends(ButtonTag, _super);
         function ButtonTag(options) {
@@ -2874,6 +3009,78 @@ var cf;
         return OptionTag;
     }(cf.Tag));
     cf.OptionTag = OptionTag;
+})(cf || (cf = {}));
+
+/// <reference path="Tag.ts"/>
+/// <reference path="../parsing/TagsParser.ts"/>
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+// namespace
+var cf;
+(function (cf) {
+    // interface
+    // class
+    var OfferTag = /** @class */ (function (_super) {
+        __extends(OfferTag, _super);
+        function OfferTag() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        Object.defineProperty(OfferTag.prototype, "type", {
+            get: function () {
+                return "offer";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(OfferTag.prototype, "label", {
+            get: function () {
+                if (this.formless) {
+                    return _super.prototype.getLabel.call(this);
+                }
+                else {
+                    return cf.Helpers.getInnerTextOfElement(this.domElement);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(OfferTag.prototype, "selected", {
+            get: function () {
+                return this.domElement.hasAttribute("selected");
+                // return (<HTMLOptionElement> this.domElement).selected;
+            },
+            set: function (value) {
+                this.domElement.selected = value;
+                if (value) {
+                    this.domElement.setAttribute("selected", "selected");
+                }
+                else {
+                    this.domElement.removeAttribute("selected");
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        OfferTag.prototype.setTagValueAndIsValid = function (value) {
+            var isValid = true;
+            // OBS: No need to set any validation og value for this tag type ..
+            // .. it is atm. only used to create pseudo elements in the OptionsList
+            return isValid;
+        };
+        return OfferTag;
+    }(cf.Tag));
+    cf.OfferTag = OfferTag;
 })(cf || (cf = {}));
 
 /// <reference path="Tag.ts"/>
@@ -3188,12 +3395,19 @@ var cf;
         };
         // override
         OptionButton.prototype.getTemplate = function () {
+            var isOffer = this.referenceTag.type == "offer";
+            var className = isOffer ? "cf-button offer " : "cf-button ";
             // be aware that first option element on none multiple select tags will be selected by default
-            var tmpl = '<cf-button class="cf-button ' + (this.isMultiChoice ? "cf-checkbox-button" : "") + '" ' + (this.referenceTag.domElement.selected ? "selected='selected'" : "") + '>';
+            var tmpl = '<cf-button class="' + className + (this.isMultiChoice ? "cf-checkbox-button" : "") + '" ' + (this.referenceTag.domElement.selected ? "selected='selected'" : "") + '>';
             tmpl += "<div>";
             if (this.isMultiChoice)
                 tmpl += "<cf-checkbox></cf-checkbox>";
             tmpl += this.referenceTag.label;
+            if (isOffer) {
+                tmpl += '<div class="offer-date">Le 27 mai 2021<div>';
+                tmpl += '<div class="offer-image"><img src="https://cdn.uconnectlabs.com/wp-content/uploads/sites/7/2016/07/how-to-convince-candidate-to-accept-job-offer-840x560.jpg?v=15711"><div>';
+                tmpl += '<div class="offer-actions"><button>Voir</button></div>';
+            }
             tmpl += "</div>";
             tmpl += "</cf-button>";
             return tmpl;
@@ -6133,7 +6347,7 @@ var cf;
                     }
                 }
                 else {
-                    var tag = tagData.tag === "select" ? cf_1.TagsParser.parseGroupTag(tagData) : cf_1.TagsParser.parseTag(tagData);
+                    var tag = tagData.tag === "show_offers" || tagData.tag === "select" ? cf_1.TagsParser.parseGroupTag(tagData) : cf_1.TagsParser.parseTag(tagData);
                     if (cf_1.Tag.isTagValid(tag)) {
                         var tagElement = cf_1.Tag.createTag(tag);
                         tags.push(tagElement);

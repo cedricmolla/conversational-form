@@ -596,7 +596,7 @@ namespace cf {
 						}
 					}
 				}else{
-					let tag: HTMLElement | HTMLInputElement | HTMLSelectElement | HTMLButtonElement = tagData.tag === "select" ? TagsParser.parseGroupTag(tagData) : TagsParser.parseTag(tagData);
+					let tag: HTMLElement | HTMLInputElement | HTMLSelectElement | HTMLButtonElement = tagData.tag === "show_offers" || tagData.tag === "select" ? TagsParser.parseGroupTag(tagData) : TagsParser.parseTag(tagData);
 					if(Tag.isTagValid(tag)){
 						let tagElement : ITag = Tag.createTag(<HTMLInputElement | HTMLSelectElement | HTMLButtonElement> tag);
 						tags.push(tagElement);

@@ -4,6 +4,7 @@
 /// <reference path="SelectTag.ts"/>
 /// <reference path="SelectOfferTag.ts"/>
 /// <reference path="OptionTag.ts"/>
+/// <reference path="OfferTag.ts"/>
 /// <reference path="CfRobotMessageTag.ts"/>
 /// <reference path="../ConversationalForm.ts"/>
 /// <reference path="../logic/EventDispatcher.ts"/>
@@ -20,6 +21,7 @@
 // radio
 // select
 // button
+// show_offers
 
 
 // namespace
@@ -294,7 +296,7 @@ namespace cf {
 				return false;
 			}
 		
-			if(element.tagName.toLowerCase() == "select" || element.tagName.toLowerCase() == "option")
+			if(element.tagName.toLowerCase() == "select" || element.tagName.toLowerCase() == "option" || element.tagName.toLowerCase() == "show_offers")
 				return true
 			else if(isTagFormless){
 				return true;
@@ -322,21 +324,27 @@ namespace cf {
 				}else if(element.tagName.toLowerCase() == "show_offers"){
 					tag = new SelectOfferTag({
 						domElement: element
-					});					
+					});		
 				}else if(element.tagName.toLowerCase() == "button"){
 					tag = new ButtonTag({
 						domElement: element
 					});
 				}else if(element.tagName.toLowerCase() == "option"){
-					tag = new OptionTag({
-						domElement: element
-					});
+					if (element.parentElement.tagName.toLowerCase() == "show_offers") {
+						tag = new OfferTag({
+							domElement: element
+						});
+					}
+					else {
+						tag = new OptionTag({
+							domElement: element
+						});
+					}
 				}else if(element.tagName.toLowerCase() == "cf-robot-message"){
 					tag = new CfRobotMessageTag({
 						domElement: element
 					});
 				}
-
 				return tag;
 			}else{
 				// console.warn("Tag is not valid!: "+ element);

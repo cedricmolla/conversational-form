@@ -46,14 +46,23 @@ namespace cf {
 
 		// override
 		public getTemplate () : string {
+			const isOffer = this.referenceTag.type == "offer"
+			const className = isOffer ? "cf-button offer " : "cf-button " 
 			// be aware that first option element on none multiple select tags will be selected by default
-			let tmpl: string = '<cf-button class="cf-button ' + (this.isMultiChoice ? "cf-checkbox-button" : "") + '" ' + ((<HTMLOptionElement> this.referenceTag.domElement).selected ? "selected='selected'" : "") + '>';
+			let tmpl: string = '<cf-button class="' + className + (this.isMultiChoice ? "cf-checkbox-button" : "") + '" ' + ((<HTMLOptionElement> this.referenceTag.domElement).selected ? "selected='selected'" : "") + '>';
 
 			tmpl += "<div>";
 			if(this.isMultiChoice)
 				tmpl += "<cf-checkbox></cf-checkbox>";
 
 			tmpl += this.referenceTag.label;
+			
+			if(isOffer) {
+				tmpl += '<div class="offer-date">Le 27 mai 2021<div>'
+				tmpl += '<div class="offer-image"><img src="https://cdn.uconnectlabs.com/wp-content/uploads/sites/7/2016/07/how-to-convince-candidate-to-accept-job-offer-840x560.jpg?v=15711"><div>'
+				tmpl += '<div class="offer-actions"><button>Voir</button></div>'
+			}
+
 			tmpl += "</div>";
 
 			tmpl += "</cf-button>";
