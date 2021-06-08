@@ -3406,7 +3406,7 @@ var cf;
             if (isOffer) {
                 tmpl += '<div class="offer-date">Le 27 mai 2021<div>';
                 tmpl += '<div class="offer-image"><img src="https://cdn.uconnectlabs.com/wp-content/uploads/sites/7/2016/07/how-to-convince-candidate-to-accept-job-offer-840x560.jpg?v=15711"><div>';
-                tmpl += '<div class="offer-actions"><button>Voir</button></div>';
+                tmpl += '<div class="offer-actions"><button class="offer-infos">Voir infos</button><button class="offer-apply">Postuler</button></div>';
             }
             tmpl += "</div>";
             tmpl += "</cf-button>";
