@@ -422,7 +422,8 @@ namespace cf {
 			this.image = options.image;
 			this.response = this.originalResponse = options.response;
 			this.isRobotResponse = options.isRobotResponse;
-			
+			this._tag = options.tag;
+
 			super.setData(options);
 		}
 		protected onElementCreated(){
@@ -459,6 +460,33 @@ namespace cf {
 		}
 		// template, can be overwritten ...
 		public getTemplate () : string {
+			if (this._tag && this._tag.type === 'offers') {
+				return `<cf-chat-response class="robot response-with-offers">
+					<thumb><span></span></thumb>
+					<text></text>
+					<div class="offers-list">
+						<div class="cf-offer">
+							Test
+							<div class="offer-date">Le 27 mai 2021<div>
+							<div class="offer-image"><img src="https://cdn.uconnectlabs.com/wp-content/uploads/sites/7/2016/07/how-to-convince-candidate-to-accept-job-offer-840x560.jpg?v=15711"><div>
+							<div class="offer-actions"><button class="offer-infos">Voir infos</button><button class="offer-apply">Postuler</button></div>
+						</div>
+						<div class="cf-offer">
+							Test
+							<div class="offer-date">Le 27 mai 2021<div>
+							<div class="offer-image"><img src="https://cdn.uconnectlabs.com/wp-content/uploads/sites/7/2016/07/how-to-convince-candidate-to-accept-job-offer-840x560.jpg?v=15711"><div>
+							<div class="offer-actions"><button class="offer-infos">Voir infos</button><button class="offer-apply">Postuler</button></div>
+						</div>
+						<div class="cf-offer">
+							Test
+							<div class="offer-date">Le 27 mai 2021<div>
+							<div class="offer-image"><img src="https://cdn.uconnectlabs.com/wp-content/uploads/sites/7/2016/07/how-to-convince-candidate-to-accept-job-offer-840x560.jpg?v=15711"><div>
+							<div class="offer-actions"><button class="offer-infos">Voir infos</button><button class="offer-apply">Postuler</button></div>
+						</div>
+					</div>
+				</cf-chat-response>`
+				;
+			}
 			return `<cf-chat-response class="` + (this.isRobotResponse ? "robot" : "user") + `">
 				<thumb><span></span></thumb>
 				<text></text>

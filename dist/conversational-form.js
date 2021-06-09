@@ -5325,6 +5325,7 @@ var cf;
             this.image = options.image;
             this.response = this.originalResponse = options.response;
             this.isRobotResponse = options.isRobotResponse;
+            this._tag = options.tag;
             _super.prototype.setData.call(this, options);
         };
         ChatResponse.prototype.onElementCreated = function () {
@@ -5358,6 +5359,9 @@ var cf;
         };
         // template, can be overwritten ...
         ChatResponse.prototype.getTemplate = function () {
+            if (this._tag && this._tag.type === 'offers') {
+                return "<cf-chat-response class=\"robot response-with-offers\">\n\t\t\t\t\t<thumb><span></span></thumb>\n\t\t\t\t\t<text></text>\n\t\t\t\t\t<div class=\"offers-list\">\n\t\t\t\t\t\t<div class=\"cf-offer\">\n\t\t\t\t\t\t\tTest\n\t\t\t\t\t\t\t<div class=\"offer-date\">Le 27 mai 2021<div>\n\t\t\t\t\t\t\t<div class=\"offer-image\"><img src=\"https://cdn.uconnectlabs.com/wp-content/uploads/sites/7/2016/07/how-to-convince-candidate-to-accept-job-offer-840x560.jpg?v=15711\"><div>\n\t\t\t\t\t\t\t<div class=\"offer-actions\"><button class=\"offer-infos\">Voir infos</button><button class=\"offer-apply\">Postuler</button></div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class=\"cf-offer\">\n\t\t\t\t\t\t\tTest\n\t\t\t\t\t\t\t<div class=\"offer-date\">Le 27 mai 2021<div>\n\t\t\t\t\t\t\t<div class=\"offer-image\"><img src=\"https://cdn.uconnectlabs.com/wp-content/uploads/sites/7/2016/07/how-to-convince-candidate-to-accept-job-offer-840x560.jpg?v=15711\"><div>\n\t\t\t\t\t\t\t<div class=\"offer-actions\"><button class=\"offer-infos\">Voir infos</button><button class=\"offer-apply\">Postuler</button></div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class=\"cf-offer\">\n\t\t\t\t\t\t\tTest\n\t\t\t\t\t\t\t<div class=\"offer-date\">Le 27 mai 2021<div>\n\t\t\t\t\t\t\t<div class=\"offer-image\"><img src=\"https://cdn.uconnectlabs.com/wp-content/uploads/sites/7/2016/07/how-to-convince-candidate-to-accept-job-offer-840x560.jpg?v=15711\"><div>\n\t\t\t\t\t\t\t<div class=\"offer-actions\"><button class=\"offer-infos\">Voir infos</button><button class=\"offer-apply\">Postuler</button></div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</cf-chat-response>";
+            }
             return "<cf-chat-response class=\"" + (this.isRobotResponse ? "robot" : "user") + "\">\n\t\t\t\t<thumb><span></span></thumb>\n\t\t\t\t<text></text>\n\t\t\t</cf-chat-response>";
         };
         ChatResponse.THINKING_MARKUP = "<p class='show'><thinking><span>.</span><span>.</span><span>.</span></thinking></p>";
