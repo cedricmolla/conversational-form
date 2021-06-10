@@ -467,20 +467,20 @@ namespace cf {
 					<div class="offers-list">
 						<div class="cf-offer">
 							Test
-							<div class="offer-date">Le 27 mai 2021<div>
-							<div class="offer-image"><img src="https://cdn.uconnectlabs.com/wp-content/uploads/sites/7/2016/07/how-to-convince-candidate-to-accept-job-offer-840x560.jpg?v=15711"><div>
+							<div class="offer-date">Le 27 mai 2021</div>
+							<div class="offer-image"><img src="https://cdn.uconnectlabs.com/wp-content/uploads/sites/7/2016/07/how-to-convince-candidate-to-accept-job-offer-840x560.jpg?v=15711"></div>
 							<div class="offer-actions"><button class="offer-infos">Voir infos</button><button class="offer-apply">Postuler</button></div>
 						</div>
 						<div class="cf-offer">
 							Test
-							<div class="offer-date">Le 27 mai 2021<div>
-							<div class="offer-image"><img src="https://cdn.uconnectlabs.com/wp-content/uploads/sites/7/2016/07/how-to-convince-candidate-to-accept-job-offer-840x560.jpg?v=15711"><div>
+							<div class="offer-date">Le 27 mai 2021</div>
+							<div class="offer-image"><img src="https://cdn.uconnectlabs.com/wp-content/uploads/sites/7/2016/07/how-to-convince-candidate-to-accept-job-offer-840x560.jpg?v=15711"></div>
 							<div class="offer-actions"><button class="offer-infos">Voir infos</button><button class="offer-apply">Postuler</button></div>
 						</div>
 						<div class="cf-offer">
 							Test
-							<div class="offer-date">Le 27 mai 2021<div>
-							<div class="offer-image"><img src="https://cdn.uconnectlabs.com/wp-content/uploads/sites/7/2016/07/how-to-convince-candidate-to-accept-job-offer-840x560.jpg?v=15711"><div>
+							<div class="offer-date">Le 27 mai 2021</div>
+							<div class="offer-image"><img src="https://cdn.uconnectlabs.com/wp-content/uploads/sites/7/2016/07/how-to-convince-candidate-to-accept-job-offer-840x560.jpg?v=15711"></div>
 							<div class="offer-actions"><button class="offer-infos">Voir infos</button><button class="offer-apply">Postuler</button></div>
 						</div>
 					</div>
