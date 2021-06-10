@@ -466,22 +466,55 @@ namespace cf {
 					<text></text>
 					<div class="offers-list">
 						<div class="cf-offer">
-							Test
-							<div class="offer-date">Le 27 mai 2021</div>
-							<div class="offer-image"><img src="https://cdn.uconnectlabs.com/wp-content/uploads/sites/7/2016/07/how-to-convince-candidate-to-accept-job-offer-840x560.jpg?v=15711"></div>
-							<div class="offer-actions"><button class="offer-infos">Voir infos</button><button class="offer-apply">Postuler</button></div>
+						  <div class="cf-offer-logo">
+						    <img class="cf-offer-logo-img" />
+						    <span class="cf-offer-contract">
+						      CDI
+						    </span>
+						  </div>
+						  <div class="cf-offer-infos">
+						    <span class="cf-offer-name">Agent commercial spécialisé en pharmaceutique</span>
+						    <span class="cf-offer-date">Le 27 mai 2021</span>
+						    <span class="cf-offer-location">Remote</span>
+						    <div class="cf-offer-actions">
+						      <button class="cf-offer-infos-btn">Infos</button>
+						      <button class="cf-offer-apply-btn">Postuler</button>
+						    </div>
+						  </div>
 						</div>
 						<div class="cf-offer">
-							Test
-							<div class="offer-date">Le 27 mai 2021</div>
-							<div class="offer-image"><img src="https://cdn.uconnectlabs.com/wp-content/uploads/sites/7/2016/07/how-to-convince-candidate-to-accept-job-offer-840x560.jpg?v=15711"></div>
-							<div class="offer-actions"><button class="offer-infos">Voir infos</button><button class="offer-apply">Postuler</button></div>
+						  <div class="cf-offer-logo">
+						    <img class="cf-offer-logo-img" />
+						    <span class="cf-offer-contract">
+						      CDI
+						    </span>
+						  </div>
+						  <div class="cf-offer-infos">
+						    <span class="cf-offer-name">Agent commercial spécialisé en pharmaceutique</span>
+						    <span class="cf-offer-date">Le 27 mai 2021</span>
+						    <span class="cf-offer-location">Remote</span>
+						    <div class="cf-offer-actions">
+						      <button class="cf-offer-infos-btn">Infos</button>
+						      <button class="cf-offer-apply-btn">Postuler</button>
+						    </div>
+						  </div>
 						</div>
 						<div class="cf-offer">
-							Test
-							<div class="offer-date">Le 27 mai 2021</div>
-							<div class="offer-image"><img src="https://cdn.uconnectlabs.com/wp-content/uploads/sites/7/2016/07/how-to-convince-candidate-to-accept-job-offer-840x560.jpg?v=15711"></div>
-							<div class="offer-actions"><button class="offer-infos">Voir infos</button><button class="offer-apply">Postuler</button></div>
+						  <div class="cf-offer-logo">
+						    <img class="cf-offer-logo-img" />
+						    <span class="cf-offer-contract">
+						      CDI
+						    </span>
+						  </div>
+						  <div class="cf-offer-infos">
+						    <span class="cf-offer-name">Agent commercial spécialisé en pharmaceutique</span>
+						    <span class="cf-offer-date">Le 27 mai 2021</span>
+						    <span class="cf-offer-location">Remote</span>
+						    <div class="cf-offer-actions">
+						      <button class="cf-offer-infos-btn">Infos</button>
+						      <button class="cf-offer-apply-btn">Postuler</button>
+						    </div>
+						  </div>
 						</div>
 					</div>
 				</cf-chat-response>`
