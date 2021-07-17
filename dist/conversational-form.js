@@ -4101,7 +4101,7 @@ var cf;
             }
         };
         UserInputSubmitButton.prototype.getTemplate = function () {
-            return "<cf-input-button class=\"cf-input-button\">\n\t\t\t\t\t\t<div class=\"cf-input-icons\">\n\t\t\t\t\t\t\t<div class=\"cf-icon-progress\"></div>\n\t\t\t\t\t\t\t<div class=\"cf-icon-attachment\"></div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</cf-input-button>";
+            return "<div class=\"upload-btn-div\">\n\t\t\t\t\t\t<cf-input-button class=\"cf-input-button upload-btn\">\n\t\t\t\t\t\t\t<div class=\"cf-input-icons\">\n\t\t\t\t\t\t\t\t<div class=\"cf-icon-progress\"></div>\n\t\t\t\t\t\t\t\t<div class=\"cf-icon-attachment\"></div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</cf-input-button>\n\t\t\t\t\t\t<cf-input-button class=\"cf-input-button send-by-mail-btn\" id=\"send-by-mail-btn\">\n\t\t\t\t\t\t\t<div class=\"cf-input-icons\">\n\t\t\t\t\t\t\t\t<div class=\"cf-icon-send-by-mail\"></div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</cf-input-button>\n\t\t\t\t\t</div>";
         };
         UserInputSubmitButton.prototype.onMicrophoneTerminalError = function (event) {
             if (this.mic) {
@@ -4118,6 +4118,10 @@ var cf;
             }
         };
         UserInputSubmitButton.prototype.onClick = function (event) {
+            var target = event.target;
+            if (target.classList.contains('send-by-mail-btn')) {
+                return;
+            }
             var isMicVisible = this.mic && !this.typing;
             if (isMicVisible) {
                 this.mic.callInput();

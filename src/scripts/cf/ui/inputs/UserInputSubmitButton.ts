@@ -114,12 +114,19 @@ namespace cf {
 		}
 
 		public getTemplate () : string {
-			return `<cf-input-button class="cf-input-button">
-						<div class="cf-input-icons">
-							<div class="cf-icon-progress"></div>
-							<div class="cf-icon-attachment"></div>
-						</div>
-					</cf-input-button>`;
+			return `<div class="upload-btn-div">
+						<cf-input-button class="cf-input-button upload-btn">
+							<div class="cf-input-icons">
+								<div class="cf-icon-progress"></div>
+								<div class="cf-icon-attachment"></div>
+							</div>
+						</cf-input-button>
+						<cf-input-button class="cf-input-button send-by-mail-btn" id="send-by-mail-btn">
+							<div class="cf-input-icons">
+								<div class="cf-icon-send-by-mail"></div>
+							</div>
+						</cf-input-button>
+					</div>`;
 		}
 
 		protected onMicrophoneTerminalError(event: CustomEvent){
@@ -140,6 +147,13 @@ namespace cf {
 		}
 
 		private onClick(event: MouseEvent){
+			
+			const target = event.target as HTMLTextAreaElement
+			
+			if (target.classList.contains('send-by-mail-btn')) {
+				return
+			}
+
 			const isMicVisible: boolean = this.mic && !this.typing;
 			if(isMicVisible){
 				this.mic.callInput();
