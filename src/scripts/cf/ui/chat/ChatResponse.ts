@@ -461,61 +461,41 @@ namespace cf {
 		// template, can be overwritten ...
 		public getTemplate () : string {
 			if (this._tag && this._tag.type === 'offers') {
+				const offersStr = this._tag.domElement.getAttribute('cf-data')
+				
+				let elemStr = ''
+
+				if (offersStr) {
+					const offers = JSON.parse(offersStr)
+
+					elemStr = offers.map((e: any) => (
+						`
+						<div class="cf-offer">
+						  <div class="cf-offer-logo">
+						    <img class="cf-offer-logo-img" />
+						    <span class="cf-offer-contract">
+						      ${e.contractType}
+						    </span>
+						  </div>
+						  <div class="cf-offer-infos">
+						    <span class="cf-offer-name">${e.name}</span>
+						    <span class="cf-offer-date">${e.date}</span>
+						    <span class="cf-offer-location">${e.location}</span>
+						    <div class="cf-offer-actions">
+						      <button class="cf-offer-infos-btn" id="info-${e.id}">Infos</button>
+						      <button class="cf-offer-apply-btn" id="apply-${e.id}">Postuler</button>
+						    </div>
+						  </div>
+						</div>
+						`
+					)).join('')
+				}
+
 				return `<cf-chat-response class="robot response-with-offers">
 					<thumb><span></span></thumb>
 					<text></text>
 					<div class="offers-list">
-						<div class="cf-offer">
-						  <div class="cf-offer-logo">
-						    <img class="cf-offer-logo-img" />
-						    <span class="cf-offer-contract">
-						      CDI
-						    </span>
-						  </div>
-						  <div class="cf-offer-infos">
-						    <span class="cf-offer-name">Agent commercial spécialisé en pharmaceutique</span>
-						    <span class="cf-offer-date">Le 27 mai 2021</span>
-						    <span class="cf-offer-location">Remote</span>
-						    <div class="cf-offer-actions">
-						      <button class="cf-offer-infos-btn">Infos</button>
-						      <button class="cf-offer-apply-btn">Postuler</button>
-						    </div>
-						  </div>
-						</div>
-						<div class="cf-offer">
-						  <div class="cf-offer-logo">
-						    <img class="cf-offer-logo-img" />
-						    <span class="cf-offer-contract">
-						      CDI
-						    </span>
-						  </div>
-						  <div class="cf-offer-infos">
-						    <span class="cf-offer-name">Agent commercial spécialisé en pharmaceutique</span>
-						    <span class="cf-offer-date">Le 27 mai 2021</span>
-						    <span class="cf-offer-location">Remote</span>
-						    <div class="cf-offer-actions">
-						      <button class="cf-offer-infos-btn">Infos</button>
-						      <button class="cf-offer-apply-btn">Postuler</button>
-						    </div>
-						  </div>
-						</div>
-						<div class="cf-offer">
-						  <div class="cf-offer-logo">
-						    <img class="cf-offer-logo-img" />
-						    <span class="cf-offer-contract">
-						      CDI
-						    </span>
-						  </div>
-						  <div class="cf-offer-infos">
-						    <span class="cf-offer-name">Agent commercial spécialisé en pharmaceutique</span>
-						    <span class="cf-offer-date">Le 27 mai 2021</span>
-						    <span class="cf-offer-location">Remote</span>
-						    <div class="cf-offer-actions">
-						      <button class="cf-offer-infos-btn">Infos</button>
-						      <button class="cf-offer-apply-btn">Postuler</button>
-						    </div>
-						  </div>
-						</div>
+						${elemStr}
 					</div>
 				</cf-chat-response>`
 				;
