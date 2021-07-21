@@ -471,14 +471,9 @@ namespace cf {
 					elemStr = offers.map((e: any) => (
 						`
 						<div class="cf-offer">
-						  <div class="cf-offer-logo">
-						    <img class="cf-offer-logo-img" />
-						    <span class="cf-offer-contract">
-						      ${e.contractType}
-						    </span>
-						  </div>
 						  <div class="cf-offer-infos">
 						    <span class="cf-offer-name">${e.name}</span>
+						    <span class="cf-offer-contract">${e.contractType}</span>
 						    <span class="cf-offer-date">${e.date}</span>
 						    <span class="cf-offer-location">${e.location}</span>
 						    <div class="cf-offer-actions">
