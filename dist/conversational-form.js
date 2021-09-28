@@ -4101,7 +4101,7 @@ var cf;
             }
         };
         UserInputSubmitButton.prototype.getTemplate = function () {
-            return "<div class=\"upload-btn-div\">\n\t\t\t\t\t\t<cf-input-button class=\"cf-input-button upload-btn\">\n\t\t\t\t\t\t\t<div class=\"cf-input-icons\">\n\t\t\t\t\t\t\t\t<div class=\"cf-icon-progress\"></div>\n\t\t\t\t\t\t\t\t<div class=\"cf-icon-attachment\"></div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</cf-input-button>\n\t\t\t\t\t\t<cf-input-button class=\"cf-input-button send-by-mail-btn\" id=\"send-by-mail-btn\">\n\t\t\t\t\t\t\t<div class=\"cf-input-icons\">\n\t\t\t\t\t\t\t\t<div class=\"cf-icon-send-by-mail\"></div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</cf-input-button>\n\t\t\t\t\t</div>";
+            return "<div class=\"upload-btn-div\">\n\t\t\t\t\t\t<cf-input-button class=\"cf-input-button upload-btn\">\n\t\t\t\t\t\t\t<div class=\"cf-input-icons\">\n\t\t\t\t\t\t\t\t<div class=\"cf-icon-progress\"></div>\n\t\t\t\t\t\t\t\t<div class=\"cf-icon-attachment\"></div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</cf-input-button>\n\t\t\t\t\t</div>";
         };
         UserInputSubmitButton.prototype.onMicrophoneTerminalError = function (event) {
             if (this.mic) {

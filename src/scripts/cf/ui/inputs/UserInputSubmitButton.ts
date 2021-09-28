@@ -121,11 +121,6 @@ namespace cf {
 								<div class="cf-icon-attachment"></div>
 							</div>
 						</cf-input-button>
-						<cf-input-button class="cf-input-button send-by-mail-btn" id="send-by-mail-btn">
-							<div class="cf-input-icons">
-								<div class="cf-icon-send-by-mail"></div>
-							</div>
-						</cf-input-button>
 					</div>`;
 		}
 
